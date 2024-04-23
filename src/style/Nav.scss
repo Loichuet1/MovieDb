@@ -1,0 +1,45 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.596);
+    height: 10vh;
+    gap: 25px;
+    z-index: 1000;
+
+    img {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        max-height: 100%;
+    }
+
+    .buttonContainer {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        &:hover {
+            border-bottom: 0.3rem solid red;
+        }
+
+        .menuButton {
+            color: white;
+            text-decoration: 'none';
+            font-size: x-large;
+
+            &:focus,
+            &:hover,
+            &:visited,
+            &:link,
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+
+
+}

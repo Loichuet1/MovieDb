@@ -31,8 +31,6 @@ function GenreManager() {
             newGenreMap.set(genre.id, genre.name);
         }
         callback(newGenreMap);
-
-        console.log(newGenreMap);
     }
 
     return ({ fecthGenre, getGenreById })

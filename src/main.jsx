@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createContext } from 'react';
 import App from './App.jsx'
 
+import { utils } from "./utils/Utils"
 
 import MovieManager from "./managers/MovieManager";
 import GenreManager from "./managers/GenreManager.jsx"
@@ -11,7 +13,11 @@ import Movies from './pages/Movies.jsx';
 import Series from './pages/Series.jsx';
 import MyList from './pages/MyList.jsx';
 import Home from './pages/Home.jsx';
+import MovieDetail from './pages/MovieDetail.jsx';
 
+
+export const UtilsContext = createContext();
+export const GenreManagerContext = createContext();
 
 const Main = () => {
 
@@ -42,13 +48,21 @@ const Main = () => {
           path: "/myList",
           element: <MyList />,
         },
+        {
+          path: "/movieDetail/:id",
+          element: <MovieDetail movieManager={movieManager} />,
+        },
       ],
     },
   ]);
 
   return (
     <>
-      <RouterProvider router={router} />
+      <UtilsContext.Provider value={{ utils }}>
+        <GenreManagerContext.Provider value={{ genreManager }}>
+          <RouterProvider router={router} />
+        </GenreManagerContext.Provider >
+      </UtilsContext.Provider >
     </>
   );
 };

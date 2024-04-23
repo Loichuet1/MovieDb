@@ -16,10 +16,10 @@ function MovieModal({ movie, genres }) {
 
                 </div>
                 <div className="modalGenreSection">
-                    {genres.map(genre => (
+                    {genres.map((genre, index) => (
 
                         <div
-                            key={genre}
+                            key={index}
                             className="modalGenreBlock">
                             <h1>
                                 {genre}

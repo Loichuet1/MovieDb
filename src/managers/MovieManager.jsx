@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from "react";
-import { GetAllPlayingMovies, GetAllPopularMovies, GetAllTopRatedMovies } from "../services/MovieService"
+import { useState, useCallback } from "react";
+import { GetAllPlayingMovies, GetAllPopularMovies, GetAllTopRatedMovies, GetMovieById, GetTrailerById, GetSimilar } from "../services/MovieService"
 
 
 function MovieManager() {
@@ -10,11 +10,13 @@ function MovieManager() {
     const [popularMovies, setPopularMovies] = useState(new Map());
     const [pagePopularMovies, setPagePopularMovies] = useState([]);
 
-
     const [topRatedMovies, setTopRatedMovies] = useState(new Map());
     const [pagetopRatedMovies, setPagetopRatedMovies] = useState([]);
 
     const [loading, setloading] = useState(false);
+
+    // map of detail movies
+    const [detailMovies, setDetailMovies] = useState(new Map());
 
 
     const fetchCurrentMovies = useCallback(async (page) => {
@@ -74,6 +76,68 @@ function MovieManager() {
         }
     }, [pagetopRatedMovies])
 
+    const fetchMovieById = useCallback(async (id) => {
+
+        try {
+            setloading(true);
+
+            if (detailMovies.has(Number(id))) {
+                return detailMovies.get(Number(id));
+            }
+            else {
+
+                const result = await GetMovieById(id);
+                const resultMap = new Map(detailMovies);
+                resultMap.set(result.id, result);
+
+                setDetailMovies(resultMap);
+                return result;
+            }
+        }
+        catch (error) {
+            console.error(error)
+        }
+        finally {
+            setloading(false);
+        }
+    }, [detailMovies])
+
+
+    const fetchTrailerById = useCallback(async (trailerId) => {
+
+        try {
+            setloading(true);
+
+            const results = await GetTrailerById(trailerId);
+            const firstTrailer = results.find(video => video.type === "Trailer")
+            return firstTrailer;
+        }
+        catch (error) {
+            console.error(error)
+        }
+        finally {
+            setloading(false);
+        }
+    }, [])
+
+    const fecthSimilar = useCallback(async (id, page) => {
+        try {
+            setloading(true);
+
+            let responsePage, similarMovies;
+
+            ({ page: responsePage, results: similarMovies } = await GetSimilar(id, page));
+
+            return ({ responsePage, similarMovies });
+        }
+        catch (error) {
+            console.error(error)
+        }
+        finally {
+            setloading(false);
+        }
+    })
+
 
     const convertToMap = (moviesToConvert, callback) => {
         const newMovieMap = new Map();
@@ -85,7 +149,7 @@ function MovieManager() {
         callback(newMovieMap);
     }
 
-    return ({ fetchCurrentMovies, currentMovies, fetchPopularMovies, popularMovies, fetchTopRatedMovies, topRatedMovies, loading });
+    return ({ fetchCurrentMovies, currentMovies, fetchPopularMovies, popularMovies, fetchTopRatedMovies, topRatedMovies, fetchMovieById, fetchTrailerById, fecthSimilar, loading });
 }
 
 export default MovieManager;

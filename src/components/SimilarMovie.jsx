@@ -1,9 +1,8 @@
 import { useState, useContext } from "react";
 import MovieModal from "./ModalMovie";
-import { Link } from "react-router-dom";
 import { GenreManagerContext } from '../main';
 
-function DisplayMovie({ movie }) {
+function SimilarMovie({ movie }) {
 
     const { genreManager } = useContext(GenreManagerContext);
 
@@ -23,7 +22,6 @@ function DisplayMovie({ movie }) {
 
     return (
         <div className="recentMovie" onMouseEnter={() => setHoveredMovie(true)} onMouseLeave={() => setHoveredMovie(false)}>
-            <Link className="link" to={`/movieDetail/${movie.id}`}></Link>
             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.poster_path} />
             {hoveredMovie && (<MovieModal movie={movie} genres={convertIdToGenre(movie.genre_ids)} />)}
 
@@ -31,4 +29,4 @@ function DisplayMovie({ movie }) {
     );
 }
 
-export default DisplayMovie;
+export default SimilarMovie;

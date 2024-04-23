@@ -22,13 +22,13 @@ function Home({ managers }) {
         <div >
             <div className="homeFlexbox">
 
-                <BannerMovie movies={currentMovies} genreManager={managers.genreManager} />
+                <BannerMovie movies={currentMovies} />
 
                 <div>
                     <h2>Film du Moment</h2>
                     <div className="currentMovieSection" >
                         {Array.from(currentMovies.values()).map(item => (
-                            <DisplayMovie key={item.id} movie={item} genreManager={managers.genreManager} />
+                            <DisplayMovie key={item.id} movie={item} />
                         ))}
                     </div>
                 </div>
@@ -37,7 +37,7 @@ function Home({ managers }) {
                     <h2>Film recommandé</h2>
                     <div className="currentMovieSection" >
                         {Array.from(popularMovies.values()).map(item => (
-                            <DisplayMovie key={item.id} movie={item} genreManager={managers.genreManager} />
+                            <DisplayMovie key={item.id} movie={item} />
                         ))}
                     </div>
                 </div>
@@ -46,7 +46,7 @@ function Home({ managers }) {
                     <h2>Film les mieux notés</h2>
                     <div className="currentMovieSection" >
                         {Array.from(topRatedMovies.values()).map(item => (
-                            <DisplayMovie key={item.id} movie={item} genreManager={managers.genreManager} />
+                            <DisplayMovie key={item.id} movie={item} />
                         ))}
                     </div>
                 </div>

@@ -25,6 +25,8 @@ function App({ managers }) {
       <main>
         <Outlet />
       </main>
+
+      <footer className="footer"></footer>
     </>
   );
 }

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UtilsContext } from '../main';
+import { GenreManagerContext } from '../main';
 
+function BannerMovie({ movies }) {
 
-function BannerMovie({ movies, genreManager }) {
-
+    const { utils } = useContext(UtilsContext);
+    const { genreManager } = useContext(GenreManagerContext);
 
     const [bannerMovie, setBannerMovie] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-
 
     useEffect(() => {
 
@@ -25,11 +27,9 @@ function BannerMovie({ movies, genreManager }) {
     useEffect(() => {
 
         if (movies && movies.size > 0) {
-            //console.log(currentIndex);
             const valuesArray = Array.from(movies.values());
 
             if (currentIndex >= valuesArray.length) {
-                // Reset to the first item if currentIndex exceeds the length of the array
                 setCurrentIndex(0);
             }
 
@@ -46,10 +46,6 @@ function BannerMovie({ movies, genreManager }) {
         }
     }
 
-    const truncate = (string, n) => {
-        return string.slice(0, n);
-    }
-
     return (
         <div className="banner">
             {bannerMovie && (
@@ -60,7 +56,7 @@ function BannerMovie({ movies, genreManager }) {
                         <h2>{bannerMovie.title}</h2>
                         <div className="infoFlexbox">
                             <h1 style={{ color: "#90fe6c" }}>{bannerMovie.vote_average.toFixed(1) * 10} %</h1>
-                            <h1>{truncate(bannerMovie.release_date, 4)}</h1>
+                            <h1>{utils.truncate(bannerMovie.release_date, 4)}</h1>
 
                         </div>
                         <div className="descriptionSection">{bannerMovie.overview}</div>

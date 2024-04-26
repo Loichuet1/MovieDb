@@ -23,6 +23,8 @@
         bottom: 0;
 
         overflow-y: auto;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
 
         h2 {
             margin: 1rem;
@@ -34,7 +36,7 @@
         h1 {
             margin: 2rem;
             color: white;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             font-size: 25px;
         }
 
@@ -120,8 +122,10 @@
         flex-direction: row;
         overflow-y: scroll;
         height: 100%;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
 
-        .recentMovie {
+        .movie {
             position: relative;
 
             .link {
@@ -133,6 +137,7 @@
             img {
                 height: 30rem;
                 width: 20rem;
+
             }
         }
 

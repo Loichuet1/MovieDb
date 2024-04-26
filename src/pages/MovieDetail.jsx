@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useContext } from 'react';
 import { UtilsContext } from '../main';
+import { AccountManagerContext } from '../main';
+
 import SimilarSection from "../components/SimilarSection"
 
 import '../style/MovieDetailStyle.scss'
@@ -10,6 +12,10 @@ function MovieDetail({ movieManager }) {
 
     const { id } = useParams();
     const { utils } = useContext(UtilsContext);
+
+    //account Manager
+    const { accountManager } = useContext(AccountManagerContext);
+    const { watchList, addorRemoveFromFavorite, addorRemoveFromWatchList } = accountManager;
 
     const [similarSectionOpen, setSimilarSectionOpen] = useState(false);
 
@@ -69,7 +75,7 @@ function MovieDetail({ movieManager }) {
                                 <p>.</p>
                                 <p>{`Durée : ${utils.convertTime(currentMovieDetail.runtime)}`}</p>
                                 <p>.</p>
-                                <p>{`Pays : ${currentMovieDetail.production_countries[0].name}`}</p>
+                                <p>{`Pays : ${currentMovieDetail?.production_countries[0]?.name}`}</p>
                                 <p>.</p>
                                 <p style={{ color: "#90fe6c" }}>{currentMovieDetail.vote_average.toFixed(1) * 10} %</p>
 
@@ -94,12 +100,23 @@ function MovieDetail({ movieManager }) {
                                 Regarder la bande annonce
                             </button>
 
-                            <button>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                Ajouter à ma liste
-                            </button>
+                            {watchList?.has(currentMovieDetail.id) ?
+
+                                <button onClick={() => addorRemoveFromWatchList(currentMovieDetail.id, false, "movie")}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                    </svg>
+                                    Retirer de ma liste
+                                </button>
+
+                                :
+                                <button onClick={() => addorRemoveFromWatchList(currentMovieDetail.id, true, "movie")}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    Ajouter à ma liste
+                                </button>
+                            }
 
                             <button onClick={() => setSimilarSectionOpen(!similarSectionOpen)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

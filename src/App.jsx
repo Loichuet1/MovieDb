@@ -6,9 +6,8 @@ import './style/Nav.scss';
 function App({ managers }) {
 
   useEffect(() => {
-
     managers.genreManager.fecthGenre();
-
+    managers.accountManager.getWatchList();
   }, [])
 
   return (
@@ -19,7 +18,7 @@ function App({ managers }) {
         <div className="buttonContainer"><Link className="menuButton" to="/movies">Movies</Link></div>
         <div className="buttonContainer"><Link className="menuButton" to="/series">Series</Link></div>
         <div className="buttonContainer"><Link className="menuButton" to="/mostRecent">Most Recent</Link></div>
-        <div className="buttonContainer"><Link className="menuButton" to="/myList">My List</Link></div>
+        <div className="buttonContainer"><Link className="menuButton" to="/myList">Ma Liste</Link></div>
 
       </nav>
       <main>

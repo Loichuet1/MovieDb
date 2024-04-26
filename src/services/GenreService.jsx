@@ -9,6 +9,4 @@ export async function GetAllGenre() {
     const genres = data.genres;
 
     return genres;
-
-
 }

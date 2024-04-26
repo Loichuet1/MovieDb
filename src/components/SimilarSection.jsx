@@ -13,8 +13,6 @@ function SimilarSection({ parentId, movieManager }) {
 
                     let responsePage, similarMovies;
                     ({ responsePage, similarMovies } = await movieManager.fecthSimilar(parentId, 1));
-
-                    console.log(similarMovies);
                     setSimilarMovies(similarMovies);
                 } catch (error) {
                     console.error('Error fetching movie:', error);
@@ -33,7 +31,7 @@ function SimilarSection({ parentId, movieManager }) {
                     <div className="similarMoviesContairener" >
 
                         {similarMovies.map(movie => (
-                            <DisplayMovie key={movie.id} movie={movie} />
+                            movie.poster_path && (<DisplayMovie key={movie.id} movie={movie} />)
                         ))}
                     </div>
                 </div>

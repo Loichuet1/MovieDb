@@ -3,7 +3,7 @@ import { GetAllGenre } from "../services/GenreService";
 
 function GenreManager() {
 
-    const [genre, setGenre] = useState(new Map())
+    const [genres, setGenre] = useState(new Map())
 
 
     const fecthGenre = useCallback(async () => {
@@ -19,7 +19,7 @@ function GenreManager() {
 
     const getGenreById = (id) => {
 
-        return genre.has(id) ? genre.get(id) : null;
+        return genres.has(id) ? genres.get(id).name : null;
     }
 
 
@@ -28,12 +28,12 @@ function GenreManager() {
 
         for (const genre of genreToConvert) {
 
-            newGenreMap.set(genre.id, genre.name);
+            newGenreMap.set(genre.id, genre);
         }
         callback(newGenreMap);
     }
 
-    return ({ fecthGenre, getGenreById })
+    return ({ fecthGenre, getGenreById, genres })
 
 }
 

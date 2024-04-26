@@ -9,6 +9,7 @@ import { utils } from "./utils/Utils"
 import MovieManager from "./managers/MovieManager";
 import GenreManager from "./managers/GenreManager.jsx"
 import AccountManager from './managers/AccountManager.jsx';
+import DiscoverManager from './managers/DiscoverManager.jsx';
 
 import MostRecent from './pages/MostRecent.jsx';
 import Movies from './pages/Movies.jsx';
@@ -21,12 +22,14 @@ import MovieDetail from './pages/MovieDetail.jsx';
 export const UtilsContext = createContext();
 export const GenreManagerContext = createContext();
 export const AccountManagerContext = createContext();
+export const DiscoverManagerContext = createContext();
 
 const Main = () => {
 
   const movieManager = new MovieManager();
   const genreManager = new GenreManager();
   const accountManager = new AccountManager();
+  const discovermanager = new DiscoverManager();
 
   const router = createBrowserRouter([
     {
@@ -65,9 +68,11 @@ const Main = () => {
       <UtilsContext.Provider value={{ utils }}>
         <GenreManagerContext.Provider value={{ genreManager }}>
           <AccountManagerContext.Provider value={{ accountManager }}>
+            <DiscoverManagerContext.Provider value={{ discovermanager }}>
 
-            <RouterProvider router={router} />
+              <RouterProvider router={router} />
 
+            </DiscoverManagerContext.Provider >
           </AccountManagerContext.Provider >
         </GenreManagerContext.Provider >
       </UtilsContext.Provider >

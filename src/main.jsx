@@ -11,7 +11,6 @@ import GenreManager from "./managers/GenreManager.jsx"
 import AccountManager from './managers/AccountManager.jsx';
 import DiscoverManager from './managers/DiscoverManager.jsx';
 
-import MostRecent from './pages/MostRecent.jsx';
 import Movies from './pages/Movies.jsx';
 import Series from './pages/Series.jsx';
 import MyList from './pages/MyList.jsx';
@@ -46,10 +45,6 @@ const Main = () => {
         {
           path: "/movies",
           element: <Movies />,
-        },
-        {
-          path: "/mostRecent",
-          element: <MostRecent />,
         },
         {
           path: "/myList",

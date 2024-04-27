@@ -14,10 +14,9 @@ function App({ managers }) {
     <>
       <nav className="navbar">
         <img src="https://images.rtl.fr/~c/795v350/rtl/www/1162231-logo-netflix.jpg" alt="logo" />
-        <div className="buttonContainer">  <Link className="menuButton" to="/">Home</Link></div>
-        <div className="buttonContainer"><Link className="menuButton" to="/movies">Movies</Link></div>
-        <div className="buttonContainer"><Link className="menuButton" to="/series">Series</Link></div>
-        <div className="buttonContainer"><Link className="menuButton" to="/mostRecent">Most Recent</Link></div>
+        <div className="buttonContainer">  <Link className="menuButton" to="/">Accueil</Link></div>
+        <div className="buttonContainer"><Link className="menuButton" to="/movies">Films</Link></div>
+        <div className="buttonContainer"><Link className="menuButton" to="/series">Séries</Link></div>
         <div className="buttonContainer"><Link className="menuButton" to="/myList">Ma Liste</Link></div>
 
       </nav>

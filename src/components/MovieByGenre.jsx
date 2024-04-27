@@ -15,6 +15,7 @@ function MovieByGenre({ genre }) {
     const [movieByGenre, setMovieByGenre] = useState([])
 
     const movieByGenreContainerRef = useRef(null);
+
     useEffect(() => {
 
         const fecthMovieByGenre = async () => {

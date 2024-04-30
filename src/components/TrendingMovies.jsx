@@ -10,7 +10,7 @@ function Trendingmovies() {
 
     // context
     const { discovermanager } = useContext(DiscoverManagerContext);
-    const { ddiscoverMovies } = discovermanager;
+    const { discoverMovies } = discovermanager;
 
     // trendingMovies state
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -21,8 +21,9 @@ function Trendingmovies() {
 
         // fecth discoverMovie with sort type and value when component mount
         const fecthTrendingMovies = async () => {
-            const { page, results } = await discovermanager?.discoverMovies(filterType, filterValue, 1);
-            setTrendingMovies(results);
+            const { page, convertedArray } = await discovermanager?.discoverMovies(filterType, filterValue, 1);
+
+            setTrendingMovies(Array.from(convertedArray.values()));
         }
         fecthTrendingMovies();
 

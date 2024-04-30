@@ -2,7 +2,9 @@
 import { GenreManagerContext } from '../main';
 import { useContext, useEffect, useState } from 'react';
 import Trendingmovies from '../components/TrendingMovies';
-import MovieByGenre from '../components/MovieByGenre';
+import Serie_MovieSectionWithApi from "../components/Serie_MovieSectionWithApi";
+import DisplayMovie from "../components/MovieComponents";
+
 import '../style/MoviesSectionStyle.scss'
 
 
@@ -65,7 +67,7 @@ function Movies() {
 
             <div className='bodyGenresMovies'>
                 {mapToDisplay().map(genre => (
-                    <MovieByGenre key={genre.id} genre={genre} />
+                    <Serie_MovieSectionWithApi key={genre.id} genre={genre} ComponentToUse={DisplayMovie} />
                 ))}
             </div>
         </div>

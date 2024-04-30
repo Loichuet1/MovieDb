@@ -113,43 +113,42 @@
         .sectionbyGenre {
 
             margin-top: 5vh;
+            margin-left: 1rem;
+            margin-right: 1rem;
 
-            .movieByGenreContainer {
+            .movieAndSerieSection {
                 display: flex;
+                justify-content: left;
                 flex-direction: row;
-                overflow-y: scroll;
-                height: 100%;
-                scrollbar-width: thin;
-                scroll-behavior: smooth;
+                overflow-y: visible;
+                overflow-x: visible;
+                gap: 10px;
+                //height: 50vh;
+                max-width: 100vw;
 
-                button {
-                    height: 30rem;
+                .arrowButton {
 
                     background-color: rgba(0, 0, 0, 0.267);
-                    border-top-left-radius: 1rem;
-                    border-bottom-left-radius: 1rem;
+                    border-radius: 1rem;
                     border: none;
+                    height: 23vw;
 
                     svg {
-                        width: 2rem;
+                        width: 2vw;
                     }
                 }
+            }
 
-                .movieAndSerie {
-                    position: relative;
+            .movieAndSerie {
+                position: relative;
+                width: 17.5vw;
+                height: 23vw;
 
-                    img {
-                        height: 30rem;
-                        width: 20rem;
-
-                    }
+                .movieAndSerieImage {
+                    width: 100%;
+                    height: 100%;
                 }
-
             }
         }
-
-
     }
-
-
 }

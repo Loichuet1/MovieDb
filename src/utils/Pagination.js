@@ -9,9 +9,7 @@ export default function Pagination(itemPerPage, items) {
     // use as a flag to check if page can be reset or not
     const [adjustPage, setAdjustPage] = useState(false);
 
-
     useEffect(() => {
-
         const managePageToDisplay = () => {
 
             const startingIndex = (currentPage - 1) * itemPerPage;

@@ -1,27 +1,42 @@
 import { useCallback, useState } from "react";
-import { GetAllGenre } from "../services/GenreService";
+import { GetAllMovieGenre, GetAllSerieGenre } from "../services/GenreService";
 
 function GenreManager() {
 
-    const [genres, setGenre] = useState(new Map())
+    const [movieGenres, setMovieGenres] = useState(new Map())
+    const [serieGenres, setSerieGenres] = useState(new Map())
 
-
-    const fecthGenre = useCallback(async () => {
+    const fecthMovieGenres = useCallback(async () => {
 
         try {
-            const genre = await GetAllGenre();
-            convertToMap(genre, setGenre);
+            const genres = await GetAllMovieGenre();
+            convertToMap(genres, setMovieGenres);
         }
-        catch {
-
+        catch (error) {
+            console.error(`An error did occur in ${this} : ${error}`)
         }
     })
 
-    const getGenreById = (id) => {
+    const fecthSerieGenres = useCallback(async () => {
 
-        return genres.has(id) ? genres.get(id).name : null;
+        try {
+            const genres = await GetAllSerieGenre();
+            convertToMap(genres, setSerieGenres);
+        }
+        catch (error) {
+            console.error(`An error did occur in ${this} : ${error}`)
+        }
+    })
+
+    const getMovieGenreById = (id) => {
+
+        return movieGenres.has(id) ? movieGenres.get(id).name : null;
     }
 
+    const getSerieGenreById = (id) => {
+
+        return serieGenres.has(id) ? serieGenres.get(id).name : null;
+    }
 
     const convertToMap = (genreToConvert, callback) => {
         const newGenreMap = new Map();
@@ -33,8 +48,7 @@ function GenreManager() {
         callback(newGenreMap);
     }
 
-    return ({ fecthGenre, getGenreById, genres })
-
+    return ({ fecthMovieGenres, fecthSerieGenres, getSerieGenreById, getMovieGenreById, movieGenres, serieGenres })
 }
 
 

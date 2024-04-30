@@ -1,12 +1,31 @@
 import { api_Key, url, language } from "../ContextFolder/Context"
 
 
-export async function GetAllGenre() {
+export async function GetAllMovieGenre() {
 
-    const response = await fetch(`${url}/genre/movie/list?language=${language}&api_key=${api_Key}`)
-    const data = await response.json();
+    return GetAllWebRequest("/movie");
+}
 
-    const genres = data.genres;
 
-    return genres;
+export async function GetAllSerieGenre() {
+
+    return GetAllWebRequest("/tv")
+}
+
+
+export async function GetAllWebRequest(endpoint) {
+
+    try {
+        const response = await fetch(`${url}/genre${endpoint}/list?language=${language}&api_key=${api_Key}`)
+
+        const data = await response.json();
+        const genres = data.genres;
+
+        return genres;
+
+    } catch (error) {
+
+    }
+
+
 }

@@ -67,7 +67,7 @@ function BannerMovie({ movies }) {
                                     className="block">
                                     <div
                                         className="genre">
-                                        {genreManager.getGenreById(genreId)}
+                                        {genreManager.getMovieGenreById(genreId)}
                                     </div>
                                 </div>
 

@@ -49,7 +49,7 @@ function MovieByGenre({ genre }) {
                 }
 
                 {movieByGenre.map(movie => (
-                    <DisplayMovie key={movie.id} movie={movie} />
+                    <DisplayMovie key={movie.id} item={movie} />
                 ))}
 
                 <button onClick={() => setCurrentPage(currentPage + 1)}>

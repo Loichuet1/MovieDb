@@ -1,13 +1,25 @@
 import { Link, Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AccountManagerContext } from "./main"
+import { GenreManagerContext } from "./main";
 import './App.css'
 import './style/Nav.scss';
 
-function App({ managers }) {
+function App({ }) {
+
+  const { accountManager } = useContext(AccountManagerContext);
+  const { genreManager } = useContext(GenreManagerContext);
 
   useEffect(() => {
-    managers.genreManager.fecthGenre();
-    managers.accountManager.getWatchList();
+    genreManager?.fecthMovieGenres();
+    genreManager?.fecthSerieGenres();
+
+    accountManager?.getWatchListMovies();
+    accountManager?.getWatchListTV();
+
+    accountManager?.getFavoriteMovies();
+    accountManager?.getFavoriteTV();
+
   }, [])
 
   return (

@@ -95,7 +95,7 @@
         .selectedButton {
 
             border-radius: 0.3rem;
-            box-shadow: 1px 1px 10px 1px red;
+            box-shadow: 1px 1px 10px 1px gray;
 
         }
     }
@@ -135,14 +135,8 @@
                     }
                 }
 
-                .movie {
+                .movieAndSerie {
                     position: relative;
-
-                    .link {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                    }
 
                     img {
                         height: 30rem;

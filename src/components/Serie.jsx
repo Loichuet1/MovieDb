@@ -1,32 +1,31 @@
 import { useState, useContext } from "react";
-import HomeItemsModal from "./HomeItemsModal";
 import { GenreManagerContext } from '../main';
+import HomeItemsModal from "./HomeItemsModal";
 import { EItemType } from "../Enumeration/EItemType";
 
-function DisplayMovie({ item }) {
+function Serie({ item }) {
 
     const { genreManager } = useContext(GenreManagerContext);
 
-    const [hoveredMovie, setHoveredMovie] = useState(false)
+    const [hoveredSerie, setHoveredSerie] = useState(false)
 
     const convertIdToGenre = (ids) => {
 
         const genres = [];
 
         for (const id of ids) {
-            genres.push(genreManager.getMovieGenreById(id));
+            genres.push(genreManager.getSerieGenreById(id));
         }
 
         return genres;
     }
 
-
     return (
-        <div className="movieAndSerie" onMouseEnter={() => setHoveredMovie(true)} onMouseLeave={() => setHoveredMovie(false)}>
+        <div className="movieAndSerie" onMouseEnter={() => setHoveredSerie(true)} onMouseLeave={() => setHoveredSerie(false)}>
             <img className="movieAndSerieImage" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.poster_path} />
-            {hoveredMovie && (<HomeItemsModal item={item} genres={convertIdToGenre(item.genre_ids)} path={"movieDetail"} type={EItemType.MOVIE} />)}
+            {hoveredSerie && (<HomeItemsModal item={item} genres={convertIdToGenre(item.genre_ids)} path={"serieDetail"} type={EItemType.SERIE} />)}
         </div>
-    );
+    )
 }
 
-export default DisplayMovie;
+export default Serie;

@@ -8,7 +8,7 @@ function Mylist() {
     const itemPerPages = 12;
 
     const { accountManager } = useContext(AccountManagerContext);
-    const { watchList } = accountManager;
+    const { watchListMovies } = accountManager;
 
     // calcule a startingIndex and finalIndex to splice watchList and return the watchlist to display based on itemPerPages
     const pageToDisplay = (page) => {
@@ -16,7 +16,7 @@ function Mylist() {
         const startingIndex = itemPerPages * page;
         const finalIndex = itemPerPages * +1;
 
-        const currentPageMovies = Array.from(watchList.values()).splice(startingIndex, finalIndex);
+        const currentPageMovies = Array.from(watchListMovies.values()).splice(startingIndex, finalIndex);
 
         return currentPageMovies;
     }
@@ -24,7 +24,7 @@ function Mylist() {
     // calculate the number of pages and return an array of pages count
     const PageCount = () => {
 
-        const pagesNumber = Math.ceil(Array.from(watchList.values())?.length / itemPerPages);
+        const pagesNumber = Math.ceil(Array.from(watchListMovies.values())?.length / itemPerPages);
         return Array.from({ length: pagesNumber }, (_, index) => index + 1);
     }
 
@@ -35,7 +35,7 @@ function Mylist() {
         setDisplayedMovies(pageToDisplay(0));
         // scroll back to top on mount
         window.scrollTo(0, 0)
-    }, [watchList])
+    }, [watchListMovies])
 
     return (
         <div>
@@ -43,7 +43,7 @@ function Mylist() {
                 <h2>Ma liste de film à voir</h2>
                 <div className="myListFlexbox" >
                     {Array.from(displayedMovies.values()).map(item => (
-                        <DisplayMovie key={item.id} movie={item} />
+                        <DisplayMovie key={item.id} item={item} />
                     ))}
                 </div>
                 <div className="paginationContainer">

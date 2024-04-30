@@ -31,7 +31,7 @@ function SimilarSection({ parentId, movieManager }) {
                     <div className="similarMoviesContairener" >
 
                         {similarMovies.map(movie => (
-                            movie.poster_path && (<DisplayMovie key={movie.id} movie={movie} />)
+                            movie.poster_path && (<DisplayMovie key={movie.id} item={movie} />)
                         ))}
                     </div>
                 </div>

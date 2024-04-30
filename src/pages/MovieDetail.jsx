@@ -15,7 +15,7 @@ function MovieDetail({ movieManager }) {
 
     //account Manager
     const { accountManager } = useContext(AccountManagerContext);
-    const { watchList, addorRemoveFromFavorite, addorRemoveFromWatchList } = accountManager;
+    const { watchListMovies, addorRemoveFromFavorite, addorRemoveFromWatchList } = accountManager;
 
     const [similarSectionOpen, setSimilarSectionOpen] = useState(false);
 
@@ -100,7 +100,7 @@ function MovieDetail({ movieManager }) {
                                 Regarder la bande annonce
                             </button>
 
-                            {watchList?.has(currentMovieDetail.id) ?
+                            {watchListMovies?.has(currentMovieDetail.id) ?
 
                                 <button onClick={() => addorRemoveFromWatchList(currentMovieDetail.id, false, "movie")}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

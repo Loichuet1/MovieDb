@@ -1,6 +1,6 @@
 
 import { GenreManagerContext } from '../main';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Trendingmovies from '../components/TrendingMovies';
 import MovieByGenre from '../components/MovieByGenre';
 import '../style/MoviesSectionStyle.scss'
@@ -9,7 +9,7 @@ import '../style/MoviesSectionStyle.scss'
 function Movies() {
 
     const { genreManager } = useContext(GenreManagerContext);
-    const { genres } = genreManager;
+    const { movieGenres } = genreManager;
 
     const [filteredGenres, setFilteredGenres] = useState([]);
     const [filterButtonsDisplayed, setFilterButtonsDisplayed] = useState(false);
@@ -36,8 +36,13 @@ function Movies() {
 
     // according to filteredGenres length display all genres or filteredGenres
     const mapToDisplay = () => {
-        return filteredGenres.length === 0 ? Array.from(genres.values()) : filteredGenres;
+        return filteredGenres.length === 0 ? Array.from(movieGenres.values()) : filteredGenres;
     }
+
+    useEffect(() => {
+        // scroll back to top on mount
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className='movieSectionBody'>
@@ -53,7 +58,7 @@ function Movies() {
             {filterButtonsDisplayed && (
                 <div className='filterButtonSection'>
 
-                    {Array.from(genres.values()).map(genre => (
+                    {Array.from(movieGenres.values()).map(genre => (
                         <button className={filteredGenres.find(g => g.id === genre.id) ? "selectedButton" : "button"} onClick={() => manageFilter(genre)} key={genre.id}>{genre.name}</button>
                     ))}
                 </div>)}

@@ -45,7 +45,7 @@ export default function HomeItemsModal({ item, genres, path, type }) {
             <Link className="link" to={`/${path}/${item.id}`}></Link>
 
             <div className="imageContainer">
-                <img className="modalImage" src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`} alt={item.backdrop_path} />
+                <img className="modalImage" src={`https://image.tmdb.org/t/p/original${item.backdrop_path ? item.backdrop_path : item.poster_path}`} alt={item.backdrop_path} />
                 <h2>{displayName()}</h2>
             </div>
             <div className="info">

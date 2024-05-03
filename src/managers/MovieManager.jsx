@@ -120,15 +120,13 @@ function MovieManager() {
         }
     }, [])
 
-    const fecthSimilar = useCallback(async (id, page) => {
+    const fecthSimilar = useCallback(async (id, choosenPage) => {
         try {
             setloading(true);
 
-            let responsePage, similarMovies;
+            const { page, results } = await GetSimilar(id, choosenPage);
 
-            ({ page: responsePage, results: similarMovies } = await GetSimilar(id, page));
-
-            return ({ responsePage, similarMovies });
+            return ({ page, results });
         }
         catch (error) {
             console.error(error)

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { GetPopularSeries, GetTopRatedSeries } from "../services/SerieService"
+import { GetPopularSeries, GetTopRatedSeries, GetSerieById, GetSimilarSeries } from "../services/SerieService"
 
 
 function SerieManager() {
@@ -39,6 +39,29 @@ function SerieManager() {
 
     }, [])
 
+    const fecthSerieById = useCallback(async (id) => {
+
+        try {
+            const result = await GetSerieById(id);
+            return result;
+
+        } catch (error) {
+            console.error(`An error did occur in ${this} : ${error}`)
+        }
+    }, [])
+
+    const fecthSimilarSeries = useCallback(async (id, choosenPage) => {
+        try {
+            const { page, results } = await GetSimilarSeries(id, choosenPage);
+
+            return ({ page, results });
+
+
+        } catch (error) {
+            console.error(`An error did occur in ${this} : ${error}`)
+        }
+    }, [])
+
 
     const convertToMap = (moviesToConvert, callback) => {
         const newMovieMap = new Map();
@@ -50,7 +73,7 @@ function SerieManager() {
         callback(newMovieMap);
     }
 
-    return ({ fetchPopularSeries, popularSeries, fetchTopRatedSeries, topRatedSeries })
+    return ({ fetchPopularSeries, popularSeries, fetchTopRatedSeries, topRatedSeries, fecthSerieById, fecthSimilarSeries })
 
 }
 

@@ -1,0 +1,49 @@
+.SaisonSection {
+    margin-left: 2rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .saison {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        width: 100%;
+        padding-bottom: 1rem;
+        border-bottom: 0.1rem solid rgb(255, 255, 255);
+
+        .saisonPoster {
+            width: 20%;
+            align-self: center;
+
+        }
+
+        .saisonInfos {
+            width: 100%;
+
+            .titleFlex {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+
+                .title {
+                    margin: 1rem;
+                    color: white;
+                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                    font-size: 1.2vw;
+                }
+
+            }
+
+            p {
+                margin: 0.5rem;
+                color: white;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 0.8vw;
+            }
+        }
+    }
+
+}

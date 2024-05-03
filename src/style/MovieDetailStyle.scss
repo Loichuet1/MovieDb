@@ -9,7 +9,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-
     }
 
     .infoContainer {
@@ -111,6 +110,7 @@
 .bodySimilar {
 
     margin-top: 2rem;
+    margin-bottom: 3rem;
 
     h2 {
         color: white;
@@ -120,24 +120,39 @@
     .similarMoviesContairener {
         display: flex;
         flex-direction: row;
-        overflow-y: scroll;
         height: 100%;
-        scrollbar-width: thin;
-        scroll-behavior: smooth;
+        justify-content: center;
+
+        .movieAndSerieSection {
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+            overflow-y: visible;
+            overflow-x: visible;
+            gap: 10px;
+            max-width: 100vw;
+
+            .arrowButton {
+
+                background-color: rgba(0, 0, 0, 0.267);
+                border-radius: 1rem;
+                border: none;
+                height: 23vw;
+
+                svg {
+                    width: 2vw;
+                }
+            }
+        }
 
         .movieAndSerie {
             position: relative;
+            width: 17.5vw;
+            height: 23vw;
 
-            .link {
-                position: absolute;
+            .movieAndSerieImage {
                 width: 100%;
                 height: 100%;
-            }
-
-            img {
-                height: 30rem;
-                width: 20rem;
-
             }
         }
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useContext } from 'react';
 import { UtilsContext } from '../main';
 import { AccountManagerContext } from '../main';
+import DisplayMovie from "../components/MovieComponents";
 
 import SimilarSection from "../components/SimilarSection"
 
@@ -19,8 +20,11 @@ function MovieDetail({ movieManager }) {
 
     const [similarSectionOpen, setSimilarSectionOpen] = useState(false);
 
-    const [currentMovieDetail, setCurrentMovieDetail] = useState(null)
-    const [trailer, setTrailer] = useState(null)
+    const [currentMovieDetail, setCurrentMovieDetail] = useState(null);
+    const [trailer, setTrailer] = useState(null);
+
+    const [similarMovies, setSimilarMovies] = useState(new Map());
+
 
     useEffect(() => {
 
@@ -41,11 +45,23 @@ function MovieDetail({ movieManager }) {
                     const movieTrailer = await movieManager.fetchTrailerById(id);
                     setTrailer(movieTrailer);
                 } catch (error) {
-                    console.error('Error fetching movie:', error);
+                    console.error('Error fetching movie trailer:', error);
                 }
             }
         };
 
+        const fecthSimilarMovies = async () => {
+            if (id) {
+                try {
+                    const { page, results } = await movieManager.fecthSimilar(id, 1);
+                    setSimilarMovies(utils.convertToMap(results));
+                } catch (error) {
+                    console.error('Error fetching similar movies:', error);
+                }
+            }
+        };
+
+        fecthSimilarMovies();
         fetchMovie();
         fetchTrailer();
 
@@ -129,7 +145,7 @@ function MovieDetail({ movieManager }) {
                 )}
 
             {similarSectionOpen && (
-                <SimilarSection parentId={id} movieManager={movieManager} />
+                <SimilarSection items={similarMovies} title={"Films similaires"} ComponentToUse={DisplayMovie} />
             )}
         </div>
     );

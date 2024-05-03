@@ -20,7 +20,33 @@ async function GetAllSeriesWebRequest(endpoint, choosenPage) {
 
         return { results, page };
     } catch (error) {
-        console.error(`An error occurred: ${error}`);
+        console.error(`An error occurred: ${error} in ${this}`);
         throw error;
+    }
+}
+
+
+export async function GetSerieById(id) {
+
+    try {
+
+        const response = await fetch(`${url}/tv/${id}?language=${language}&api_key=${api_Key}`)
+        const result = await response.json();
+
+        return result;
+
+    } catch (error) {
+        console.error(`An error occurred: ${error} in ${this}`);
+        throw error;
+    }
+}
+
+export async function GetSimilarSeries(id, choosenPage) {
+    try {
+        const { page, results } = await GetAllSeriesWebRequest(`/tv/${id}/similar`, choosenPage);
+        return ({ page, results })
+    }
+    catch (error) {
+        throw new Error(error);
     }
 }

@@ -3,7 +3,6 @@ import Pagination from "../utils/Pagination";
 export default function Serie_MovieSection({ items, ComponentToUse, itemPerPage, title }) {
 
     const paginationInstance = new Pagination(itemPerPage, items);
-
     return (
         <div  >
             <h2>{title}</h2>

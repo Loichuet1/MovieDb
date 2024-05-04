@@ -81,12 +81,8 @@ export default function HomeItemsModal({ item, genres, path, type }) {
                         </button>
                     }
 
-                </div>
-
-                <div className="textSection">
-                    <p>{`Recommandé par ${utils.convertToPercent(item.vote_average)} %`} </p>
+                    <p>{`Recommandé à ${utils.convertToPercent(item.vote_average)} %`} </p>
                     <p>{utils.truncate(item?.release_date, 4)}</p>
-
                 </div>
 
                 <div className="genreSection">

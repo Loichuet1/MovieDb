@@ -4,32 +4,78 @@
     gap: 10px;
     min-height: 85vh;
 
-    h2 {
-        margin: 1vh;
+    .myListHeader {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 4vw;
         margin-top: 2vh;
-        color: white;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        margin-right: 5vw;
+        margin-bottom: 3vh;
+
+        .filterButtonsSection {
+
+            display: flex;
+            flex-direction: row;
+            gap: 1vw;
+
+            .filterButton {
+                border-radius: 0.3rem;
+                border: none;
+                background-color: rgb(109, 108, 108);
+                color: white;
+
+                &:hover {
+                    background-color: rgb(78, 78, 78);
+                }
+            }
+
+            .filterButtonSelected {
+                border-radius: 0.3rem;
+                background-color: white;
+                box-shadow: 1px 1px 10px 1px gray;
+
+                &:hover {
+                    background-color: rgb(179, 179, 179)
+                }
+            }
+        }
+
+        h2 {
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
     }
+
 
     .myListFlexbox {
 
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 3vh;
+
+        .movieAndSerieSection {
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+            overflow-y: visible;
+            overflow-x: visible;
+            gap: 10px;
+            max-width: 100vw;
+        }
 
         .movieAndSerie {
-            width: 25%;
-
             position: relative;
+            width: 17.5vw;
+            height: 23vw;
 
-            .link {
-                position: absolute;
+            .movieAndSerieImage {
                 width: 100%;
                 height: 100%;
-            }
-
-
-            img {
-                width: 100%
             }
         }
     }

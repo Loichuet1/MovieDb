@@ -24,7 +24,7 @@ function TrendingMovies_Series({ discoverItemsCallback, title }) {
 
         const interval = setInterval(() => {
             rotateMovieToDisplay();
-        }, 100000000);
+        }, 10000);
 
         return () => {
             clearInterval(interval);

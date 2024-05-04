@@ -28,17 +28,19 @@
             .trendingMoviecard {
 
                 position: relative;
+                width: 17.5vw;
+                height: 23vw;
 
                 img {
-                    height: 50vh;
-                    width: 17.5vw;
+                    height: 100%;
+                    width: 100%;
                 }
 
                 .classement {
                     box-sizing: border-box;
                     width: 40%;
                     height: 30%;
-                    bottom: 4px;
+                    bottom: 0;
                     right: 0;
                     position: absolute;
                     background-color: rgba(12, 12, 12, 0.493);
@@ -95,6 +97,10 @@
             border: none;
             background-color: rgb(109, 108, 108);
             color: white;
+
+            &:hover {
+                background-color: rgb(78, 78, 78);
+            }
         }
 
         .selectedButton {
@@ -102,6 +108,9 @@
             border-radius: 0.3rem;
             box-shadow: 1px 1px 10px 1px gray;
 
+            &:hover {
+                background-color: rgb(179, 179, 179)
+            }
         }
     }
 

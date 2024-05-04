@@ -1,9 +1,24 @@
 import { api_Key, url, language } from "../ContextFolder/Context"
 
-export async function GetDiscoverMovies(filterType, filterValue, choosenPage) {
+export async function GetDiscoverMovies(filterType, filterValue, chosenPage) {
+
+    return await GetDiscoverItems(filterType, filterValue, chosenPage, "/movie")
+}
+
+export async function GetDiscoverSeries(filterType, filterValue, chosenPage) {
+
+    return await GetDiscoverItems(filterType, filterValue, chosenPage, "/tv")
+}
+
+async function GetDiscoverItems(filterType, filterValue, chosenPage, endpoint) {
 
     try {
-        const response = await fetch(`${url}/discover/movie?language=${language}&page=${choosenPage}&${filterType}=${filterValue}&api_key=${api_Key}`)
+
+        if (!filterType || !filterValue || isNaN(chosenPage)) {
+            throw new Error("Invalid parameters provided.");
+        }
+
+        const response = await fetch(`${url}/discover${endpoint}?language=${language}&page=${chosenPage}&${filterType}=${filterValue}&api_key=${api_Key}`)
         const data = await response.json();
 
         const page = data.page;
@@ -12,6 +27,7 @@ export async function GetDiscoverMovies(filterType, filterValue, choosenPage) {
         return ({ page, results })
 
     } catch (error) {
-        console.error(`An erro dis occur in ${this} : ${error}`)
+        console.error(`An error occurred in GetDiscoverItems: ${error}`);
+        throw error;
     }
 }

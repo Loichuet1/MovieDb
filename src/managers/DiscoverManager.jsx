@@ -1,6 +1,7 @@
 // manage Discover Part of movie DB api
 import { useCallback } from "react";
-import { GetDiscoverMovies } from "../services/DiscoverService"
+import { GetDiscoverMovies, GetDiscoverSeries } from "../services/DiscoverService"
+import { utils } from "../utils/Utils";
 
 function DiscoverManager() {
 
@@ -8,7 +9,7 @@ function DiscoverManager() {
 
         try {
             const { page, results } = await GetDiscoverMovies(filterType, filterValue, choosenPage)
-            const convertedArray = convertToMap(results);
+            const convertedArray = utils.convertToMap(results);
 
             return ({ page, convertedArray });
         }
@@ -19,17 +20,21 @@ function DiscoverManager() {
 
     }, [])
 
-    const convertToMap = (moviesToConvert) => {
-        const newMovieMap = new Map();
+    const discoverSeries = useCallback(async (filterType, filterValue, choosenPage) => {
 
-        for (const movie of moviesToConvert) {
+        try {
+            const { page, results } = await GetDiscoverSeries(filterType, filterValue, choosenPage)
+            const convertedArray = utils.convertToMap(results);
 
-            newMovieMap.set(movie.id, movie);
+            return ({ page, convertedArray });
+
+        } catch (error) {
+            console.error(`An error did occur in ${this} : ${error}`)
+
         }
-        return newMovieMap;
-    }
+    }, [])
 
-    return ({ discoverMovies })
+    return ({ discoverMovies, discoverSeries })
 }
 
 export default DiscoverManager;

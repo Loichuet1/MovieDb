@@ -1,16 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { DiscoverManagerContext } from '../main';
+import { useEffect, useState } from "react";
 import TrendingMovie from "./TrendingMovie";
 
-function Trendingmovies() {
+function TrendingMovies_Series({ discoverItemsCallback, title }) {
 
     // sort type and value
     const filterType = "sort_by";
     const filterValue = "popularity.desc";
-
-    // context
-    const { discovermanager } = useContext(DiscoverManagerContext);
-    const { discoverMovies } = discovermanager;
 
     // trendingMovies state
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -21,7 +16,7 @@ function Trendingmovies() {
 
         // fecth discoverMovie with sort type and value when component mount
         const fecthTrendingMovies = async () => {
-            const { page, convertedArray } = await discovermanager?.discoverMovies(filterType, filterValue, 1);
+            const { convertedArray } = await discoverItemsCallback(filterType, filterValue, 1);
 
             setTrendingMovies(Array.from(convertedArray.values()));
         }
@@ -29,7 +24,7 @@ function Trendingmovies() {
 
         const interval = setInterval(() => {
             rotateMovieToDisplay();
-        }, 10000);
+        }, 100000000);
 
         return () => {
             clearInterval(interval);
@@ -53,7 +48,7 @@ function Trendingmovies() {
 
     return (
         <div className="trendingMovies">
-            <h2>Top 20 film du moment</h2>
+            <h2>{title}</h2>
             <div className="movieSection">
                 {getMovieToDisplay().map(movie => (
                     <TrendingMovie key={movie.id} movie={movie} index={trendingMovies.findIndex(m => m.id == movie.id) + 1} />
@@ -63,4 +58,4 @@ function Trendingmovies() {
     )
 }
 
-export default Trendingmovies;
+export default TrendingMovies_Series;

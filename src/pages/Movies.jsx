@@ -1,45 +1,23 @@
 
 import { GenreManagerContext } from '../main';
-import { useContext, useEffect, useState } from 'react';
-import Trendingmovies from '../components/TrendingMovies';
+import { DiscoverManagerContext } from "../main";
+import { useContext, useEffect } from 'react';
+import TrendingMovies_Series from '../components/TrendingMovies';
 import Serie_MovieSectionWithApi from "../components/Serie_MovieSectionWithApi";
 import DisplayMovie from "../components/MovieComponents";
+import FilterManager from '../managers/FilterManager';
 
 import '../style/MoviesSectionStyle.scss'
 
-
 function Movies() {
+
+    const { discovermanager } = useContext(DiscoverManagerContext);
+    const { discoverMovies } = discovermanager;
 
     const { genreManager } = useContext(GenreManagerContext);
     const { movieGenres } = genreManager;
 
-    const [filteredGenres, setFilteredGenres] = useState([]);
-    const [filterButtonsDisplayed, setFilterButtonsDisplayed] = useState(false);
-
-    const manageFilter = (genre) => {
-
-        const indexExist = filteredGenres.findIndex(g => g.id === genre.id);
-
-        let updatedFilter = [...filteredGenres];
-
-        // if do not exist add it
-        if (indexExist === -1) {
-
-            updatedFilter.push(genre);
-        }
-        // esle remove it
-        else {
-
-            updatedFilter.splice(indexExist, 1);
-        }
-
-        setFilteredGenres(updatedFilter);
-    };
-
-    // according to filteredGenres length display all genres or filteredGenres
-    const mapToDisplay = () => {
-        return filteredGenres.length === 0 ? Array.from(movieGenres.values()) : filteredGenres;
-    }
+    const { filterButtonsDisplayed, setFilterButtonsDisplayed, filteredGenres, mapToDisplay, manageFilter } = FilterManager(movieGenres);
 
     useEffect(() => {
         // scroll back to top on mount
@@ -48,7 +26,7 @@ function Movies() {
 
     return (
         <div className='movieSectionBody'>
-            <Trendingmovies />
+            <TrendingMovies_Series discoverItemsCallback={discoverMovies} title={"Films populaires du moment"} />
 
             <div className='filterTitle'>
 
@@ -67,7 +45,7 @@ function Movies() {
 
             <div className='bodyGenresMovies'>
                 {mapToDisplay().map(genre => (
-                    <Serie_MovieSectionWithApi key={genre.id} genre={genre} ComponentToUse={DisplayMovie} />
+                    <Serie_MovieSectionWithApi key={genre.id} genre={genre} ComponentToUse={DisplayMovie} discoverItemsCallback={discoverMovies} />
                 ))}
             </div>
         </div>
